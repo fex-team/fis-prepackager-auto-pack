@@ -5,16 +5,23 @@ FIS3针对后端模板的项目静态资源自动打包插件，支持 **静态�
 
 ## 快速使用
 
+安装插件
+
+```
+npm install [-g] fis3-prepackager-autopack 
+```
+
+添加配置
+
     $ vi path/to/project/fis-conf.js
 
 ```javascript
 fis.match('::package', {
-    //打包前获取自动打包配置
     prepackager: fis.plugin('autopack')
 })
 ```
 
-## 配置说明
+## 打包方式
 
 ### 静态代码分析
 
@@ -27,12 +34,10 @@ fis.match('::package', {
 
 基于统计的自动打包方案可以根据[此项目](https://github.com/fex-team/autopack-kernel)说明实施。
 
-
-插件配置方式如下：
+配置方式如下：
 
 ```javascript
 fis.match('::package', {
-    //打包前获取自动打包配置
     prepackager: fis.plugin('autopack',{
         type : 'log', //获取配置方式
         api  : 'http://youapi', //获取自动打包配置的api
@@ -45,39 +50,69 @@ fis.match('::package', {
 
 ```json
 {
-    'status' : 'success' //返回状态，success等于成功
-    'data'   : {} ,  //打包配置
-    'msg'    : 'error msg' 错误消息
+    "status" : "success" //返回状态，success等于成功
+    "data"   : {} ,  //打包配置
+    "msg"    : "error msg" 错误消息
 }
+
 ```
 
 您也可以根据此插件重新开发符合自己需求的基于统计的自动打包插件。
 
-### 参数说明
+## 参数说明
 
-**type**
+默认为基于代码分析的自动打包，不需要填写任何参数
 
-获取配置方式，默认为`simple`(基于代码依赖分析的打包)，基于统计的为`log`
+```javascript
+fis.match('::package', {
+    //打包前获取自动打包配置
+    prepackager: fis.plugin('autopack',{
 
-**api**
+        /***以下为基于统计的自动打包配置***/
 
-获取模块自动打包配置的api接口，仅在基于统计的自动打包方式下使用
+        //log/simple获取配置方式，默认为simple
+        type : 'log', 
 
-**params**
+        //获取模块自动打包配置的api接口，仅在基于统计的自动打包方式下使用
+        api  : 'http://youapi', 
 
-object, 传递给后端api的参数，与api一起搭配使用
+        //传递给api的参数，可自定义，默认包括模块 module字段,与api一起使用
+        params : {}  
 
-**打包参数**
 
-打包参数为autopack-kernel模块的参数，全部为可选。具体可以查看[项目文档](https://github.com/fex-team/autopack-kernel)。主要包括：
+        /**以下为打包模块参数，均为可选具体可以查看[项目文档](https://github.com/fex-team/autopack-kernel)**/
 
- - platform : pc/mobile,不同终端计算参数有差别，默认为pc，可选
- - rtt : 计算自动打包的rtt时间，默认pc为0.1s，可选
- - speed : 计算资源下载速率的参数，默认pc为100KB/s ，可选
- - staticType : 计算自动打包的资源类型，默认为['js','css']，可选
- - partKeys： 资源分组方式，可选。默认区分同步异步分组['loadType'],另外支持区分优先级分组['priority']
- - defaultPack：自定义打包配置，用于手动定义某些资源的打包方式，只支持字符串或glob方式，可选
- - baseResources： 基础资源，数组方式。打包将按照此数组资源的**顺序**将基础资源打在包的最前面
+        //pc/mobile,不同终端计算rtt和speed参数默认值不一样
+        platform : "pc" , 
+
+        //rtt时间，pc端默认0.1s ,移动端默认0.5s，越小包个数越多
+        rtt : 0.1 , 
+
+        //下载速率KB/s,pc端默认100KB/s,移动端默认，越大包个数越小
+        speed : 100, 
+
+        //计算自动打包配置的资源类型，默认为js和css
+        staticType ： ['js','css'],
+
+        //资源分组依据，默认根据同步异步(loadType)分别打包，另外支持优先级priority
+        //如果设置[]，则不进行任何区分
+        partKeys: ['loadType','priority'] , 
+
+        //自定义打包配置，控制特定资源的打包方式，默认为空
+        //注意配置不支持正则，推荐用glob
+        defaultPack: {
+            '/static/pkg/aio.css' : [
+                '**.css' 
+            ]
+        },
+
+        //基础资源配置，这些资源将按指定顺序打在包的最前面
+        //支持文件名和全路径配置
+        baseResources: ['mod.js','require.js','esl.js','/lib/css/bootstrap.css']
+
+    })
+})
+```
 
 
 **其他说明**
