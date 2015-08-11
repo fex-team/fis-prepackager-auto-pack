@@ -1,4 +1,4 @@
-# fis-prepackager-autopack
+# fis-prepackager-auto-pack
 
 FIS针对后端模板的项目静态资源自动打包插件，支持 **静态代码分析** 和 **动态统计分析** 两种自动打包方式。
 
@@ -9,7 +9,7 @@ FIS针对后端模板的项目静态资源自动打包插件，支持 **静态�
 安装插件
 
 ```
-npm install [-g] fis-prepackager-autopack 
+npm install [-g] fis-prepackager-auto-pack 
 ```
 
 添加配置 
@@ -20,7 +20,7 @@ npm install [-g] fis-prepackager-autopack
 
 ```javascript
 fis.match('::package', {
-    prepackager: fis.plugin('autopack',{/**options**/})
+    prepackager: fis.plugin('auto-pack',{/**options**/})
 })
 ```
 
@@ -29,11 +29,11 @@ fis.match('::package', {
 ```javascript
 fis.config.merge({
     modules: {
-        prepackager: 'autopack' 
+        prepackager: 'auto-pack' 
     },
     settings: {
         prepackager:{
-            autopack : {/**options**/}
+            auto-pack : {/**options**/}
         }
     }
 });
@@ -58,7 +58,7 @@ fis.config.merge({
 
 ```javascript
 fis.match('::package', {
-    prepackager: fis.plugin('autopack',{
+    prepackager: fis.plugin('auto-pack',{
         type : 'log', //获取配置方式
         api  : 'http://youapi', //获取自动打包配置的api
         params : {}  //传递给api的参数，可自定义，默认包括模块 module字段
@@ -88,7 +88,7 @@ fis.match('::package', {
 ```javascript
 fis.match('::package', {
     //打包前获取自动打包配置
-    prepackager: fis.plugin('autopack',{
+    prepackager: fis.plugin('auto-pack',{
 
         /***以下为基于统计的自动打包配置***/
 
