@@ -1,25 +1,42 @@
-# fis3-prepackager-autopack
+# fis-prepackager-autopack
 
-FIS3针对后端模板的项目静态资源自动打包插件，支持 **静态代码分析** 和 **动态统计分析** 两种自动打包方式。
+FIS针对后端模板的项目静态资源自动打包插件，支持 **静态代码分析** 和 **动态统计分析** 两种自动打包方式。
 
-注意：fis3打包类插件不向下兼容
+注意：支持FIS3
 
 ## 快速使用
 
 安装插件
 
 ```
-npm install [-g] fis3-prepackager-autopack 
+npm install [-g] fis-prepackager-autopack 
 ```
 
-添加配置
+添加配置 
+
+### fis3
 
     $ vi path/to/project/fis-conf.js
 
 ```javascript
 fis.match('::package', {
-    prepackager: fis.plugin('autopack')
+    prepackager: fis.plugin('autopack',{/**options**/})
 })
+```
+
+### fis2
+
+```javascript
+fis.config.merge({
+    modules: {
+        prepackager: 'autopack' 
+    },
+    settings: {
+        prepackager:{
+            autopack : {/**options**/}
+        }
+    }
+});
 ```
 
 ## 打包方式
@@ -27,6 +44,8 @@ fis.match('::package', {
 ### 静态代码分析
 
 插件默认采取静态代码分析的方式，扫描当前模块各个页面(带有isPage属性的模板)依赖的所有资源，根据使用情况计算资源合并配置。但需要注意的是对于common模块此方式不支持，因为common模块需要编译整站所有模块才能获取资源被引用的情况。
+
+纯前端项目中，fis3里面可以使用[fis3-postpackager-loader](https://github.com/fex-team/fis3-postpackager-loader)插件实现类似自动打包效果。
 
 
 ### 动态统计分析
@@ -49,7 +68,7 @@ fis.match('::package', {
 
 接口返回格式要求:
 
-```json
+```js
 {
     "status" : "success", //返回状态，success等于成功
     "data"   : {} ,  //打包配置
