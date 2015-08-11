@@ -1,0 +1,33 @@
+{
+  "name": "fis3-prepackager-autopack",
+  "description": "A prepackager plugin for fis-plus/jello to auto-pack resources.",
+  "version": "0.0.1",
+  "author": {
+    "name": "fis"
+  },
+  "homepage": "http://fis.baidu.com/",
+  "dependencies": {
+    "qs": "0.6.6",
+    "shelljs": "0.2.6",
+    "rimraf": "2.2.5",
+    "json-literal": "1.1.0",
+    "concat-stream": "1.4.1",
+    "colors": "0.6.2",
+    "adm-zip": "0.4.4",
+    "gzip-js": "0.3.2",
+    "autopack-kernel" : "*"
+  },
+  "keywords": [
+    "fis"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "install" : "node install.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "https://github.com/fex-team/fis3-prepackager-autopack",
+  "license": "BSD"
+}
