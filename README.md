@@ -2,6 +2,7 @@
 
 FIS3针对后端模板的项目静态资源自动打包插件，支持 **静态代码分析** 和 **动态统计分析** 两种自动打包方式。
 
+注意：fis3打包类插件不向下兼容
 
 ## 快速使用
 
@@ -50,7 +51,7 @@ fis.match('::package', {
 
 ```json
 {
-    "status" : "success" //返回状态，success等于成功
+    "status" : "success", //返回状态，success等于成功
     "data"   : {} ,  //打包配置
     "msg"    : "error msg" 错误消息
 }
@@ -61,7 +62,9 @@ fis.match('::package', {
 
 ## 参数说明
 
-默认为基于代码分析的自动打包，不需要填写任何参数
+默认为基于代码分析的自动打包，不需要填写任何参数。
+
+打包参数具体可以查看[项目文档](https://github.com/fex-team/autopack-kernel)
 
 ```javascript
 fis.match('::package', {
@@ -76,11 +79,11 @@ fis.match('::package', {
         //获取模块自动打包配置的api接口，仅在基于统计的自动打包方式下使用
         api  : 'http://youapi', 
 
-        //传递给api的参数，可自定义，默认包括模块 module字段,与api一起使用
+        //传递给api的参数，可自定义，默认包括模块(module)字段,与api一起使用
         params : {}  
 
 
-        /**以下为打包模块参数，均为可选具体可以查看[项目文档](https://github.com/fex-team/autopack-kernel)**/
+        /**以下为打包模块参数**/
 
         //pc/mobile,不同终端计算rtt和speed参数默认值不一样
         platform : "pc" , 

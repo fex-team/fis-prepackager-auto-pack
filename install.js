@@ -14,7 +14,7 @@ if(isMac){
 
 function install(packageName,version){ 
     var cmd = "npm install " + packageName + "@" + version;
-    console.log("install "+ packageName + " on mac ");
+    console.log("install "+ packageName + " on mac. please wait.... ");
     cp.exec(cmd ,function(err, stdout, stderr){
         console.log(stdout);
         if(err){        

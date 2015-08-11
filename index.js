@@ -23,8 +23,7 @@ module.exports = function(ret, pack, settings, opt) {
   })
  
   _.map(autoPack,function(idx,val){
-      pack[idx] = val;
+    pack[idx] = val;
   })
 
-  console.log(JSON.stringify(pack,null,4));
 };

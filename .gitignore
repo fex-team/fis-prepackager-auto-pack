@@ -4,6 +4,7 @@
 node_modules/
 log_data/
 plugin
+temp
 
 .DS_Store
 *.db
