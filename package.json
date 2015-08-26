@@ -1,7 +1,7 @@
 {
   "name": "fis-prepackager-auto-pack",
   "description": "A prepackager plugin for fis-plus/jello to auto-pack resources.",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "author": {
     "name": "fis-dev"
   },
